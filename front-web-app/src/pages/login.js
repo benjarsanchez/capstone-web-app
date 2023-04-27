@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import Link from "next/link";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
@@ -8,7 +9,7 @@ function Login() {
   const password = useRef(null);
 
   const onSubmit = async () => {
-    const result = await signIn("credentials", {
+    await signIn("credentials", {
       password: password.current.value.toString(),
       email: email.current.value,
       redirect: true,

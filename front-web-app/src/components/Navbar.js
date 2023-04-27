@@ -2,7 +2,7 @@ import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function Navbar() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   return (
     <div className="fixed top-0 mt-4 w-full">

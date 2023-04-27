@@ -1,7 +1,6 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import NextAuth from "next-auth";
 import type { NextAuthOptions } from "next-auth";
-import { User } from "next-auth";
 import jwt from "jsonwebtoken";
 
 export const authOptions: NextAuthOptions = {
@@ -37,7 +36,6 @@ export const authOptions: NextAuthOptions = {
 
         if (res.ok) {
           const decodedToken = jwt.decode(token.jwt);
-          //retornamos un user con los datos del token
           const user = {
             name: decodedToken.id,
             id: decodedToken.id,

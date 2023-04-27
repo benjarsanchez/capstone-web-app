@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import Link from "next/link";
 import Image from "next/image";
 
