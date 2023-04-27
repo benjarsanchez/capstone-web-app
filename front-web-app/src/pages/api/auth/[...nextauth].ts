@@ -44,18 +44,18 @@ export const authOptions: NextAuthOptions = {
           return user;
         } else return null;
       },
+      callbackUrl: "https://main.d1rotwpp4wrqfm.amplifyapp.com/api/auth/callback/credentials",
     }),
   ],
   secret: "secretKey",
-
   session: {
     strategy: "jwt",
   },
-
   pages: {
     signIn: "/login",
     error: "/login",
   },
+  baseUrl: "https://main.d1rotwpp4wrqfm.amplifyapp.com",
 };
 
 export default NextAuth(authOptions);

@@ -13,7 +13,7 @@ function Login() {
       password: password.current.value.toString(),
       email: email.current.value,
       redirect: true,
-      callbackUrl: "/login",
+      callbackUrl: "/",
     });
   };
 
