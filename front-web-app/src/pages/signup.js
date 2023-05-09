@@ -14,7 +14,6 @@ function SignUp() {
   const router = useRouter();
 
   const onSubmit = async () => {
-    console.log("submit");
     try {
       if (password.current.value !== confirmPassword.current.value) {
         alert("Las contraseñas no coinciden");
