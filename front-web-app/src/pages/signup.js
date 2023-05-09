@@ -1,10 +1,52 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-alert */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import Link from "next/link";
 import Image from "next/image";
+import { useRef } from "react";
+import { useRouter } from "next/router";
 
 function SignUp() {
+  const email = useRef(null);
+  const password = useRef(null);
+  const confirmPassword = useRef(null);
+  const username = useRef(null);
+  const router = useRouter();
+
+  const onSubmit = async () => {
+    console.log("submit");
+    try {
+      if (password.current.value !== confirmPassword.current.value) {
+        alert("Las contraseñas no coinciden");
+        return;
+      }
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: username.current.value,
+            email: email.current.value,
+            password: password.current.value,
+            phone_number: "+56911111111",
+          }),
+        }
+      );
+      const response = await res.json();
+      console.log(response);
+      router.push("/login");
+    } catch (error) {
+      alert(
+        "Ocurrió un error durante el registro. Por favor intenta de nuevo más tarde."
+      );
+    }
+  };
+
   return (
-    <div className="flex h-screen items-center justify-center pt-20">
+    <div className="flex h-screen items-center justify-center">
       <form className="w-full max-w-sm">
         <div className="mb-4">
           <label
@@ -18,6 +60,7 @@ function SignUp() {
             id="username"
             type="text"
             placeholder="usuario"
+            ref={username}
           />
         </div>
         <div className="mb-4">
@@ -29,6 +72,7 @@ function SignUp() {
             id="email"
             type="email"
             placeholder="usuario@correo.cl"
+            ref={email}
           />
         </div>
         <div className="mb-4">
@@ -43,6 +87,7 @@ function SignUp() {
             id="password"
             type="password"
             placeholder="*********"
+            ref={password}
           />
         </div>
         <div className="mb-4">
@@ -57,6 +102,7 @@ function SignUp() {
             id="password"
             type="password"
             placeholder="*********"
+            ref={confirmPassword}
           />
         </div>
         <div className="mb-4 flex items-center justify-between">
@@ -96,8 +142,9 @@ function SignUp() {
           <button
             className="inline-block w-[200px] rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-blue-500 focus:ring-2 focus:ring-gray-500"
             type="button"
+            onClick={onSubmit}
           >
-            Iniciar sesión
+            Registrarse
           </button>
         </div>
       </form>

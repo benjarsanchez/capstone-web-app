@@ -1,89 +1,155 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-function Publications() {
-  const publications = [
-    {
-      id: 1,
-      title: "Casa en la playa",
-      description: "Hermosa casa en la playa con vista al mar.",
-      price: "$150 por noche",
-      imageUrl: "https://via.placeholder.com/150",
-    },
-    {
-      id: 2,
-      title: "Departamento en la ciudad",
-      description: "Cómodo departamento en el centro de la ciudad.",
-      price: "$100 por noche",
-      imageUrl: "https://via.placeholder.com/150",
-    },
-    {
-      id: 3,
-      title: "Casa en la montaña",
-      description: "Acogedora casa en la montaña rodeada de naturaleza.",
-      price: "$120 por noche",
-      imageUrl: "https://via.placeholder.com/150",
-    },
-    {
-      id: 1,
-      title: "Casa en la playa",
-      description: "Hermosa casa en la playa con vista al mar.",
-      price: "$150 por noche",
-      imageUrl: "https://via.placeholder.com/150",
-    },
-    {
-      id: 1,
-      title: "Casa en la playa",
-      description: "Hermosa casa en la playa con vista al mar.",
-      price: "$150 por noche",
-      imageUrl: "https://via.placeholder.com/150",
-    },
-    {
-      id: 1,
-      title: "Casa en la playa",
-      description: "Hermosa casa en la playa con vista al mar.",
-      price: "$150 por noche",
-      imageUrl: "https://via.placeholder.com/150",
-    },
-    {
-      id: 1,
-      title: "Casa en la playa",
-      description: "Hermosa casa en la playa con vista al mar.",
-      price: "$150 por noche",
-      imageUrl: "https://via.placeholder.com/150",
-    },
-    {
-      id: 1,
-      title: "Casa en la playa",
-      description: "Hermosa casa en la playa con vista al mar.",
-      price: "$150 por noche",
-      imageUrl: "https://via.placeholder.com/150",
-    },
-  ];
+/* eslint-disable */
+import StarIcon from "@mui/icons-material/Star";
+import Button from "@mui/material/Button";
+import { getSession } from "next-auth/react";
+
+export default function Publications(props) {
+  const { publications } = props;
 
   return (
-    <div className="mt-16">
-      <h1>Lista de publicaciones</h1>
-      <ul className="divide-y divide-gray-200">
-        {publications.map((publication) => (
-          <li key={publication.id} className="flex py-4">
-            <div className="flex h-40 w-40 items-center justify-center bg-gray-200">
-              <img
-                src={publication.image}
-                className="h-full w-full object-cover"
-              />
+    <div
+      id="main_container"
+      className="mx-20 mt-3 flex h-screen max-h-full flex-col justify-center overflow-y-auto"
+    >
+      <div id="publication_list_container" className="overflow-y-auto">
+        {
+          //Si no hay publicaciones, mostrar mensaje
+          !publications ? (
+            <div className="flex justify-center">
+              <h1 className="text-4xl text-black"> No tienes publicaciones</h1>
             </div>
-            <div className="ml-3 flex flex-col justify-center">
-              <p className="text-sm font-medium text-gray-900">
-                {publication.title}
-              </p>
-              <p className="text-sm text-gray-500">{publication.description}</p>
-              <p className="text-sm text-gray-500">{publication.price}</p>
-            </div>
-          </li>
-        ))}
-      </ul>
+          ) : (
+            <ul id="publication_list">
+              {publications.map((publication) => (
+                <li key={publication.id}>
+                  <div
+                    id="publication"
+                    className="mb-14 mt-2 flex w-full flex-row gap-5"
+                  >
+                    <div
+                      id="image_container"
+                      className="flex h-56 w-1/4 items-center justify-center rounded-2xl border border-blue-500 bg-gray-200 "
+                    >
+                      {
+                        //Si no hay imagen, mostrar imagen por defecto
+                        !publication.images[
+                          Object.keys(publication.images)[0]
+                        ] ? (
+                          <img
+                            src="/Logo 1.svg"
+                            className="h-full w-full rounded-2xl object-contain"
+                          />
+                        ) : (
+                          <img
+                            src={`${process.env.NEXT_PUBLIC_API_URL}${
+                              publication.images[
+                                Object.keys(publication.images)[0]
+                              ]
+                            }`}
+                            className="y-screen h-auto w-screen object-cover"
+                          />
+                        )
+                      }
+                    </div>
+                    <div
+                      id="information_container"
+                      className="flex w-3/4 flex-col gap-2"
+                    >
+                      <h1 className="mb-[-5px] text-sm">Descripción</h1>
+                      <div
+                        id="description"
+                        className="h-4/5 w-full rounded-2xl border border-blue-500 p-3"
+                      >
+                        <p className="font-inter leading-17 text-base font-normal text-black">
+                          {publication.description}
+                        </p>
+                      </div>
+                      <div
+                        id="information"
+                        className="flex h-1/5 w-full flex-row justify-between rounded-2xl border border-blue-500 p-3"
+                      >
+                        <div
+                          id="location"
+                          className="flex max-h-full max-w-full items-center"
+                        >
+                          <p className="font-inter leading-17 text-base font-bold text-black">
+                            {publication.city}
+                          </p>
+                        </div>
+                        <div
+                          id="price"
+                          className="flex max-h-full max-w-full items-center"
+                        >
+                          <p className="font-inter leading-17 text-base font-normal text-black">
+                            Precio: ${publication.price}
+                          </p>
+                        </div>
+                        <div
+                          id="rating_and_button_container"
+                          className="flex max-h-full max-w-full items-center gap-9"
+                        >
+                          <div id="rating" className="flex gap-2">
+                            <StarIcon className="text-yellow-500" />
+                            <p>4.6</p>
+                          </div>
+
+                          <Button
+                            variant="contained"
+                            className="rounded-lg bg-blue-500 p-1"
+                          >
+                            Activa
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </div>
     </div>
   );
 }
 
-export default Publications;
+export async function getServerSideProps(context) {
+  try {
+    const session = await getSession(context);
+    if (!session) return { props: {} };
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/all`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${session.user.jwt}`,
+      },
+    });
+    if (!res.ok) {
+      throw new Error("Error en la respuesta del servidor API");
+    }
+    const data = await res.json();
+    console.log(data);
+
+    const res2 = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/user`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${session.user.jwt}`,
+      },
+    });
+    const userData = await res2.json();
+
+    const userPublications = data.filter(
+      (publication) => publication.user === userData.id
+    );
+
+    return {
+      props: {
+        publications: userPublications || [],
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return { props: {} };
+  }
+}
