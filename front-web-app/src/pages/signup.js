@@ -19,21 +19,18 @@ function SignUp() {
         alert("Las contraseñas no coinciden");
         return;
       }
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: username.current.value,
-            email: email.current.value,
-            password: password.current.value,
-            phone_number: "+56911111111",
-          }),
-        }
-      );
+      const res = await fetch("http://15.223.120.64/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: username.current.value,
+          email: email.current.value,
+          password: password.current.value,
+          phone_number: "+56911111111",
+        }),
+      });
       const response = await res.json();
       console.log(response);
       router.push("/login");

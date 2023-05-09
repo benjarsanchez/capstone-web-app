@@ -29,7 +29,7 @@ export default function Home(props) {
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   if (!session) return { props: {} };
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/user`, {
+  const res = await fetch("http://15.223.120.64/auth/user", {
     method: "GET",
     headers: {
       Authorization: `Bearer ${session.user.jwt}`,

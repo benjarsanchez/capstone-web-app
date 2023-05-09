@@ -20,7 +20,7 @@ export const authOptions: NextAuthOptions = {
         const { password, email } = credentials as any;
         // Request to backend API
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
+          "http://15.223.120.64/auth/login",
           {
             method: "POST",
             headers: {

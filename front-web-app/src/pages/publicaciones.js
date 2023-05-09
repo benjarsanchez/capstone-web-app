@@ -119,7 +119,7 @@ export async function getServerSideProps(context) {
   try {
     const session = await getSession(context);
     if (!session) return { props: {} };
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/all`, {
+    const res = await fetch("http://15.223.120.64/post/all", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${session.user.jwt}`,
@@ -131,7 +131,7 @@ export async function getServerSideProps(context) {
     const data = await res.json();
     console.log(data);
 
-    const res2 = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/user`, {
+    const res2 = await fetch("http://15.223.120.64/auth/user", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${session.user.jwt}`,
