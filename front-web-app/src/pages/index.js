@@ -1,8 +1,8 @@
 import Head from "next/head";
-import { getSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
-export default function Home(props) {
-  const { userData, session } = props;
+export default function Home() {
+  const { data: session } = useSession();
 
   return (
     <>
@@ -14,32 +14,11 @@ export default function Home(props) {
       </Head>
       <div className="flex h-screen items-center justify-center">
         {session?.user ? (
-          <h1 className="text-4xl text-black">
-            {" "}
-            Welcome username: {userData.name}
-          </h1>
+          <h1 className="text-4xl text-black"> Welcome username:</h1>
         ) : (
           <h1 className="text-4xl text-black">Home</h1>
         )}
       </div>
     </>
   );
-}
-
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
-  if (!session) return { props: {} };
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/user`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${session.user.jwt}`,
-    },
-  });
-  const userData = await res.json();
-  return {
-    props: {
-      userData,
-      session,
-    },
-  };
 }
