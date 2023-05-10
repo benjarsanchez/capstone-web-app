@@ -31,8 +31,7 @@ function SignUp() {
           phone_number: "+56911111111",
         }),
       });
-      const response = await res.json();
-      console.log(response);
+      await res.json();
       router.push("/login");
     } catch (error) {
       alert(
