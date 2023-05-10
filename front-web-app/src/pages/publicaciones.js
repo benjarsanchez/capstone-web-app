@@ -4,9 +4,29 @@
 import StarIcon from "@mui/icons-material/Star";
 import Button from "@mui/material/Button";
 import { getSession } from "next-auth/react";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useRouter } from "next/router";
 
 export default function Publications(props) {
   const { publications } = props;
+  const router = useRouter();
+
+  const handleClick = (publication) => {
+    console.log(publication);
+    router.push({
+      pathname: "/EditPropertie",
+      query: {
+        address: publication.address,
+        id: publication.id,
+        description: publication.description,
+        price: publication.price,
+        city: publication.city,
+        name: publication.name,
+        capacity: publication.capacity,
+      },
+    });
+  };
 
   return (
     <div
@@ -57,7 +77,18 @@ export default function Publications(props) {
                       id="information_container"
                       className="flex w-3/4 flex-col gap-2"
                     >
-                      <h1 className="mb-[-5px] text-sm">Descripción</h1>
+                      <div
+                        id="header_&_icons_container"
+                        className="flex justify-between"
+                      >
+                        <div className="flex">
+                          <h1 className="text-sm">Descripción</h1>
+                        </div>
+                        <div>
+                          <EditIcon onClick={() => handleClick(publication)} />
+                          <DeleteIcon />
+                        </div>
+                      </div>
                       <div
                         id="description"
                         className="h-4/5 w-full rounded-2xl border border-blue-500 p-3"

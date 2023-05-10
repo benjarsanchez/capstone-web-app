@@ -1,5 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import { useRouter } from "next/router";
+
 export default function EditPropertie() {
+  const router = useRouter();
+  const { capacity, name, address, description, price } = router.query || {};
+
   return (
     <section className="">
       <div className="mx-auto max-w-2xl px-4 py-8 lg:py-16">
@@ -54,7 +59,7 @@ export default function EditPropertie() {
                 name="name"
                 id="name"
                 className="w-full appearance-none rounded border border-blue-500 bg-white px-3 py-2 leading-tight text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
-                placeholder=""
+                value={name}
                 required=""
               />
             </div>
@@ -69,7 +74,7 @@ export default function EditPropertie() {
                 id="description"
                 rows="8"
                 className="w-full appearance-none rounded border border-blue-500 bg-white px-3 py-2 leading-tight text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
-                placeholder=""
+                value={description}
               />
             </div>
             <div className="sm:col-span-10">
@@ -84,7 +89,7 @@ export default function EditPropertie() {
                 name="direction"
                 id="direction"
                 className="w-full appearance-none rounded border border-blue-500 bg-white px-3 py-2 leading-tight text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
-                placeholder=""
+                value={address}
                 required=""
               />
             </div>
@@ -100,7 +105,7 @@ export default function EditPropertie() {
                 name="dormitorios"
                 id="dormitorios"
                 className="w-full appearance-none rounded border border-blue-500 bg-white px-3 py-2 leading-tight text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
-                placeholder=""
+                value={capacity}
                 required=""
               />
             </div>
@@ -116,7 +121,7 @@ export default function EditPropertie() {
                 name="simples"
                 id="simples"
                 className="w-full appearance-none rounded border border-blue-500 bg-white px-3 py-2 leading-tight text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
-                placeholder=""
+                value={capacity}
                 required=""
               />
             </div>
@@ -132,7 +137,7 @@ export default function EditPropertie() {
                 name="dobles"
                 id="dobles"
                 className="w-full appearance-none rounded border border-blue-500 bg-white px-3 py-2 leading-tight text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
-                placeholder=""
+                value={capacity}
                 required=""
               />
             </div>
@@ -170,7 +175,7 @@ export default function EditPropertie() {
                 name="price"
                 id="price"
                 className="w-full appearance-none rounded border border-blue-500 bg-white px-3 py-2 leading-tight text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
-                placeholder=""
+                value={price}
                 required=""
               />
             </div>
