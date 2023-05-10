@@ -25,7 +25,7 @@ export default function CreatePropertie() {
 
   const onSubmit = async () => {
     const session = await getSession();
-    const formImage = new FormData();
+    // const formImage = new FormData();
     try {
       const res = await fetch("http://15.223.120.64/post/", {
         method: "POST",
@@ -44,19 +44,20 @@ export default function CreatePropertie() {
           price: price.current.value,
         }),
       });
-      const response = await res.json();
-      formImage.append("image", image.current);
-      const img = await fetch("http://15.223.120.64/images/upload", {
-        method: "POST",
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        body: JSON.stringify({
-          image: formImage,
-          post_id: response.id,
-        }),
-      });
-      await img.json();
+      await res.json();
+      //  const response = await res.json();
+      //  formImage.append("image", image.current);
+      //  const img = await fetch("http://15.223.120.64/images/upload", {
+      //    method: "POST",
+      //    headers: {
+      //      "Content-Type": "multipart/form-data",
+      //    },
+      //    body: JSON.stringify({
+      //      image: formImage,
+      //      post_id: response.id,
+      //    }),
+      //  });
+      //  await img.json();
       router.push("/");
     } catch (error) {
       alert("Error al subir la imagen");
