@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 export default function Publications(props) {
   const { publications } = props;
   const router = useRouter();
+  console.log(publications);
 
   const handleClick = (publication) => {
     console.log(publication);
@@ -35,8 +36,8 @@ export default function Publications(props) {
     >
       <div id="publication_list_container" className="overflow-y-auto">
         {
-          //Si no hay publicaciones, mostrar mensaje
-          !publications ? (
+          //Si las publicaciones estan vacias, mostrar mensaje
+          Object.keys(publications).length === 0 ? (
             <div className="flex justify-center">
               <h1 className="text-4xl text-black"> No tienes publicaciones</h1>
             </div>
