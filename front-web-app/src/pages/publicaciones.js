@@ -64,7 +64,7 @@ export default function Publications(props) {
                           />
                         ) : (
                           <img
-                            src={`${process.env.NEXT_PUBLIC_API_URL}${
+                            src={`http://15.223.120.64${
                               publication.images[
                                 Object.keys(publication.images)[0]
                               ]
